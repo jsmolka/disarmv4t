@@ -1,0 +1,6 @@
+# Visual Studio
+.vs
+bin
+build
+*.aps
+*.user

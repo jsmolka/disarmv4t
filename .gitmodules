@@ -1,0 +1,3 @@
+[submodule "disarmv4t/modules/shell"]
+    path = disarmv4t/modules/shell
+    url = https://github.com/jsmolka/shell

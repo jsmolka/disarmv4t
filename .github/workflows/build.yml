@@ -1,0 +1,70 @@
+name: Build
+
+on:
+  push:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        shell: cmd
+
+    steps:
+      - uses: actions/checkout@master
+        with:
+          submodules: true
+
+      - name: Build
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          msbuild /property:Configuration=Release disarmv4t.sln
+
+      - name: Upload
+        uses: actions/upload-artifact@master
+        with:
+          name: disarmv4t-windows
+          path: bin\Release\disarmv4t.exe
+
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+        with:
+          submodules: true
+
+      - name: Build
+        run: |
+          mkdir disarmv4t/build
+          cd disarmv4t/build
+          cmake -DCMAKE_BUILD_TYPE=Release ..
+          make -j 4
+
+      - name: Upload
+        uses: actions/upload-artifact@master
+        with:
+          name: disarmv4t-linux
+          path: disarmv4t/build/disarmv4t
+
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@master
+        with:
+          submodules: true
+
+      - name: Build
+        run: |
+          mkdir disarmv4t/build
+          cd disarmv4t/build
+          cmake -DCMAKE_BUILD_TYPE=Release ..
+          make -j 4
+
+      - name: Upload
+        uses: actions/upload-artifact@master
+        with:
+          name: disarmv4t-macos
+          path: disarmv4t/build/disarmv4t
