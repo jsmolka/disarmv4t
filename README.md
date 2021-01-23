@@ -14,7 +14,7 @@ main:
         mov     r2, 0x3000000
 loop:
         ldr     r4, [r1], 4
-        str     r4, [r2]
+        str     r4, [r2], 4
         subs    r0, 1
         bne     loop
 ```
