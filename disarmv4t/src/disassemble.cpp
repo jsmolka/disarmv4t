@@ -314,17 +314,22 @@ std::string Arm_StatusTransfer(u32 instr)
         }
 
         std::string fsxc;
-        if (instr & kBitF) fsxc.append("f");
-        if (instr & kBitS) fsxc.append("s");
-        if (instr & kBitX) fsxc.append("x");
-        if (instr & kBitC) fsxc.append("c");
+        if (instr & (kBitF | kBitS | kBitX | kBitC))
+        {
+            fsxc.append("_");
+
+            if (instr & kBitF) fsxc.append("f");
+            if (instr & kBitS) fsxc.append("s");
+            if (instr & kBitX) fsxc.append("x");
+            if (instr & kBitC) fsxc.append("c");
+        }
 
         const auto mnemonic = fmt::format(
             FMT_COMPILE("msr{}"),
             condition(instr));
 
         return fmt::format(
-            FMT_COMPILE(MNEMONIC"{}_{},{}"),
+            FMT_COMPILE(MNEMONIC"{}{},{}"),
             mnemonic,
             psr,
             fsxc,
