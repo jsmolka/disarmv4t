@@ -104,6 +104,14 @@ std::string rlist(u16 rlist)
 
 std::string shiftedRegister(uint data)
 {
+    enum Shift
+    {
+        kShiftLsl = 0b00,
+        kShiftLsr = 0b01,
+        kShiftAsr = 0b10,
+        kShiftRor = 0b11,
+    };
+
     static constexpr const char* kMnemonics[4] = {
         "lsl", "lsr", "asr", "ror"
     };
@@ -122,7 +130,27 @@ std::string shiftedRegister(uint data)
     {
         uint amount = bit::seq<7, 5>(data);
         if (!amount)
-            return std::string(reg(rm));
+        {
+            switch (shift)
+            {
+                case kShiftLsr:
+                case kShiftAsr:
+                    amount = 32;
+                    break;
+            }
+        }
+
+        if (!amount)
+        {
+            std::string value = reg(rm);
+            switch (shift)
+            {
+                case kShiftRor:
+                    value.append(",rrx");
+                    break;
+            }
+            return value;
+        }
 
         offset = hex(amount);
     }
