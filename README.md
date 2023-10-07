@@ -42,7 +42,7 @@ Running `disarmv4t --base 0x8000000 in.bin out.txt` generates:
 ```
 
 ## Binaries
-Binaries for Windows, Linux and macOS are available as [nightly](https://github.com/jsmolka/disarmv4t/actions) or [release](https://github.com/jsmolka/disarmv4t/releases) builds.
+Binaries for Windows, Linux and macOS are available as [nightly](https://nightly.link/jsmolka/disarmv4t/workflows/build/master) or [release](https://github.com/jsmolka/disarmv4t/releases) builds.
 
 ## Build
 Detailed build instructions can be found [here](BUILD.md).
