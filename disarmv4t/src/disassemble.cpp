@@ -400,9 +400,9 @@ std::string Arm_Multiply(u32 instr)
             FMT_COMPILE(MNEMONIC"{},{},{},{}"),
             mnemonic,
             reg(rd),
-            reg(rn),
+            reg(rm),
             reg(rs),
-            reg(rm));
+            reg(rn));
     }
     else
     {
@@ -410,7 +410,7 @@ std::string Arm_Multiply(u32 instr)
             FMT_COMPILE(MNEMONIC"{},{},{}"),
             mnemonic,
             reg(rd),
-            reg(rn),
+            reg(rm),
             reg(rs));
     }
 }
@@ -439,8 +439,8 @@ std::string Arm_MultiplyLong(u32 instr)
         mnemonic,
         reg(rdl),
         reg(rdh),
-        reg(rs),
-        reg(rm));
+        reg(rm),
+        reg(rs));
 }
 
 std::string Arm_SingleDataTransfer(u32 instr)
